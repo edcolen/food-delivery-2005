@@ -1,36 +1,38 @@
-class CustomersView
+require 'readline'
+
+class MealsView
   def ask_user_for(info)
-    puts "What's the customer's #{info}?"
+    puts "What's the meal's #{info}?"
     gets.chomp
   end
 
-  def ask_user_for_id
-    puts "Choose a customer:"
+  def ask_user_for_index
+    puts "Choose a meal:"
     print '> '
-    gets.chomp.to_i
+    gets.chomp.to_i - 1
   end
 
-  def display(customers)
-    puts "No customers available" if customers.empty?
+  def display(meals)
+    puts "No meals available" if meals.empty?
 
-    customers.each do |customer|
-      puts "ID: #{customer.id} - #{customer.name} (#{customer.address})"
+    meals.each_with_index do |meal, index|
+      puts "#{index + 1} - #{meal.name} $#{meal.price}"
     end
   end
 
   def edit(info, data)
-    # permite personalização do comportamento do Readline antes da entrada ser recebida
+    # allows customization of Readline behavior before input is taken
     Readline.pre_input_hook = lambda {
-      # converte o parâmetro data para string e o insere como texto padrão no prompt
+      # converts the data parameter to a string and inserts it as the default input text in the prompt
       Readline.insert_text data.to_s
-      # atualiza a exibição com o texto inserido
+      # updates the display with the inserted text
       Readline.redisplay
-      # redefine o pre_input_hook como nil, para que o mesmo comportamento não se aplique no futuro
+      # resets the pre_input_hook to nil, so the same behavior won't apply in the future
       Readline.pre_input_hook = nil
     }
-    # solicita entrada do usuário, interpolando o parâmetro info e aguarda a entrada
+    # prompts the user, interpolating the info parameter and waits for user input
     input = Readline.readline("#{info}: ", false)
-    # processa a entrada com o método inspect e remove as aspas duplas
+    # processes the input with the inspect method, than cleans it to remove double quotes
     input.inspect.gsub('"', '')
   end
 end

@@ -1,10 +1,10 @@
 class Customer
   attr_accessor :id, :name, :address
 
-  def initialize(att = {})
-    @id = att[:id]
-    @name = att[:name]
-    @address = att[:address]
+  def initialize(attr = {})
+    @id = attr[:id]
+    @name = attr[:name]
+    @address = attr[:address]
   end
 
   def to_csv_row

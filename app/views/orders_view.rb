@@ -1,21 +1,27 @@
-class CustomersView
+require 'readline'
+
+class OrdersView
   def ask_user_for(info)
-    puts "What's the customer's #{info}?"
+    puts "What's the order's #{info}?"
     gets.chomp
   end
 
   def ask_user_for_index
-    puts "Choose a customer:"
+    puts "Choose a order:"
     print '> '
     gets.chomp.to_i - 1
   end
 
-  def display(customers)
-    puts "No customers available" if customers.empty?
+  def display(orders)
+    puts "No orders available" if orders.empty?
 
-    customers.each_with_index do |customer, index|
-      puts "#{index + 1} - #{customer.name} - #{customer.address}"
+    orders.each_with_index do |order, index|
+      puts "#{index + 1} - #{order.meal&.name} to #{order.customer&.name} delivered by #{order.employee&.username}"
     end
+  end
+
+  def show_object(data_type, data)
+    puts "Current #{data_type} is #{data}"
   end
 
   def edit(info, data)

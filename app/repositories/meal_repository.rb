@@ -1,6 +1,5 @@
-require 'csv'
-require_relative '../repositories/base_repository'
 require_relative '../models/meal'
+require_relative "../repositories/base_repository"
 
 class MealRepository < BaseRepository
   def build_element(row)

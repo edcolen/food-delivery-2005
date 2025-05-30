@@ -1,10 +1,10 @@
 class Meal
   attr_accessor :id, :name, :price
 
-  def initialize(att = {})
-    @id = att[:id]
-    @name = att[:name]
-    @price = att[:price]
+  def initialize(attr = {})
+    @id = attr[:id]
+    @name = attr[:name]
+    @price = attr[:price]
   end
 
   def to_csv_row
